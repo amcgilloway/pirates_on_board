@@ -3,18 +3,18 @@ import Pirate from './Pirate.js';
 
 
 const PirateList = (props) => {
-
-  const pirates = props.pirates.map((pirate) => {
-	 	return (<li key={pirate.id} className="component-item">
-			<Pirate pirate={pirate} onPirateClick={props.onPirateClick} />
-		</li>
-	)
-	})
+	const pirates = props.pirates.map((pirate) => {
+		 	return (<li key={pirate.id} className="component-item">
+				<Pirate pirate={pirate} />
+			</li>
+		)
+		})
 
 	return (
 		<ul className="component-list">
-			{pirates}
-		</ul>
+	    {pirates}
+	  </ul>
+
 	)
 }
  export default PirateList;

@@ -1,21 +1,8 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-class PirateFormContainer extends Component {
-  constructor(props){
-    super(props);
-    this.state = { ships: []};
-    this.handleSubmit = this.handleSubmit.bind(this)
-  }
+const PirateForm = (props) => {
 
-  componentDidMount(){
-    fetch('/ships')
-    .then((res) => res.json())
-    .then((data) => {
-      this.setState({ships: data._embedded.ships})
-    })
-  }
-
-  handleSubmit(event){
+  function handleSubmit(event){
     event.preventDefault();
     const pirate = {
         "firstName": event.target.firstName.value,
@@ -23,19 +10,19 @@ class PirateFormContainer extends Component {
         "age": event.target.age.value,
         "ship": event.target.ship.value
       }
-    this.props.onPirateSubmit(pirate)
+    props.handlePiratePost(pirate)
   }
 
-  render() {
 
-    const options = this.state.ships.map((ship, index) => {
+
+    const options = props.ships.map((ship, index) => {
       return <option key={index} value={ship._links.self.href}>{ship.name}</option>
     })
 
 
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <input type="text" placeholder="First Name" name="firstName"/>
           <input type="text" placeholder="Last Name" name="lastName"/>
           <input type="number" placeholder="Age" name="age"/>
@@ -46,8 +33,8 @@ class PirateFormContainer extends Component {
         </form>
       </div>
     )
-  }
+
 
 }
 
-export default PirateFormContainer;
+export default PirateForm;

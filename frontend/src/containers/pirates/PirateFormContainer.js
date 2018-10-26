@@ -1,28 +1,32 @@
-import React, { Component } from "react";
-import PirateForm from "../../components/pirates/PirateForm";
-import Request from '../../helpers/request.js'
+import React, {Component} from 'react';
+
+import Request from '../../helpers/request';
+import PirateForm from '../../components/pirates/PirateForm'
 
 class PirateFormContainer extends Component {
-
-  constructor(props) {
+  constructor(props){
     super(props);
-    this.handlePirateSubmit = this.handlePirateSubmit.bind(this);
+    this.state = {ships: []};
+    this.handlePiratePost = this.handlePiratePost.bind(this);
+    console.log("Pirate Form")
   }
 
-  handlePirateSubmit(pirate) {
-      let request = new Request('/pirates')
-      request.post(pirate);
-      window.location = '/pirates'
-
+  componentDidMount(){
+    const request = new Request();
+    request.get("/api/ships").then((data) => {
+      this.setState({ships: data._embedded.ships})
+    });
   }
 
-  render() {
-    return (
-      <div className="new pirate">
-        <h2>Add a Pirate</h2>
-        <PirateForm onPirateSubmit={this.handlePirateSubmit} />
-      </div>
-    );
+  handlePiratePost(pirate){
+    const request = new Request();
+    request.post('/pirates', pirate)
+  }
+
+  render(){
+
+    return <PirateForm ships = {this.state.ships} handlePiratePost= {this.handlePiratePost} />
+
   }
 }
 

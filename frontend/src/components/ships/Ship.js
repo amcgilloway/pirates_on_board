@@ -1,22 +1,19 @@
 import React  from 'react';
+import {Link} from 'react-router-dom'
 
 const Ship = (props) => {
-    const pirates = props.ship.pirates.map((pirate, index) => {
-   return  <p key={index}>{pirate.firstName} {pirate.lastName}</p>
-    })
 
-		const url = "/ships/" + props.ship.id
-		return (
-				<div className="component">
-					<a href={url}>
-					<p className="name">
-						{props.ship.name}
-					</p>
-					</a>
-          <h4>Pirates</h4>
-          {pirates}
-				</div>
-		)
+	if(!props.ship){
+		return null;
 	}
+	return (
+		<div className="component">
+				<Link to = {"/ships/" + props.ship.id} className="name">
+					{props.ship.name}
+				</Link>
+		</div>
+	)
+}
+
 
 export default Ship;

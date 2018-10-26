@@ -24,7 +24,7 @@ public class Raid {
 
     @JsonIgnoreProperties("raids")
     @ManyToMany
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @Cascade(org.hibernate.annotations.CascadeType.REMOVE)
     @JoinTable(
             name = "pirates_raids",
             joinColumns = {@JoinColumn(name = "raid_id", nullable = false, updatable = false)},
