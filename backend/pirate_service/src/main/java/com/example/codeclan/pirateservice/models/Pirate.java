@@ -40,7 +40,7 @@ public class Pirate implements Serializable {
 
     @JsonIgnoreProperties("pirates")
     @ManyToMany
-    @Cascade(org.hibernate.annotations.CascadeType.REMOVE)
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinTable(
             joinColumns = {@JoinColumn(name = "pirate_id", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "raid_id", nullable = false, updatable = false)}

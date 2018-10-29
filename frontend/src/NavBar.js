@@ -9,11 +9,6 @@ const NavBar = (props) => {
       <ul>
         <li className="navLink">
           <Link to="/pirates">Pirates</Link>
-          <ul>
-            <li className="navLink">
-              <Link to = "/pirates/new">Create Pirate</Link>
-            </li>
-          </ul>
         </li>
         <li className="navLink">
           <Link to="/ships">Ships</Link>

@@ -6,13 +6,13 @@ const Pirate = (props) => {
     return null;
   }
   return (
-    <div className="component">
+    <React.Fragment>
         <Link to = {"/pirates/" + props.pirate.id} className="name">
           {props.pirate.firstName} {props.pirate.lastName}
         </Link>
       <p>Age: {props.pirate.age}</p>
       <p>Ship: {props.pirate.ship.name}</p>
-    </div>
+    </React.Fragment>
   )
 }
 
