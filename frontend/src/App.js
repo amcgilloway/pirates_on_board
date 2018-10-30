@@ -5,6 +5,7 @@ import NavBar from './NavBar.js'
 import PirateContainer from './containers/pirates/PirateContainer'
 import SinglePirateContainer from './containers/pirates/SinglePirateContainer';
 import PirateFormContainer from './containers/pirates/PirateFormContainer';
+import PirateEditFormContainer from './containers/pirates/PirateEditFormContainer';
 
 
 
@@ -17,6 +18,11 @@ class App extends Component {
           <Switch>
           <Route exact path = '/pirates' component={PirateContainer}/>
           <Route exact path = '/pirates/new' component={PirateFormContainer}/>
+          <Route exact path="/pirates/edit/:id" render = {(props) =>{
+            const id = props.match.params.id;
+            return <PirateEditFormContainer id = {id} />
+            }}
+          />
           <Route exact path="/pirates/:id" render = {(props) =>{
             const id = props.match.params.id;
             return <SinglePirateContainer id = {id} />
