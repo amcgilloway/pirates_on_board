@@ -15,7 +15,7 @@ class PirateEditForm extends Component {
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.buildRaidOptions = this.buildRaidOptions.bind(this);
+    this.handleRaidSelect = this.handleRaidSelect.bind(this);
   }
 
  handleSubmit(event){
@@ -30,8 +30,7 @@ class PirateEditForm extends Component {
     this.props.handlePirateEdit(pirate)
   }
 
-  buildRaidOptions(e){
-
+  handleRaidSelect(e){
     const raids = [... e.target.options].filter((option) => {
       return option.selected
     }).map((option) => {
@@ -65,7 +64,7 @@ render(){
         <select name="ship" onChange={e => this.setState({ ship: e.target.value })}>
           {shipOptions}
         </select>
-        <select multiple name="raids" onChange={this.buildRaidOptions} >
+        <select multiple name="raids" onChange={this.handleRaidSelect} >
           {raidOptions}
         </select>
         <button type="submit">Save</button>
