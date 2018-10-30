@@ -18,6 +18,14 @@ class SinglePirateContainer extends Component {
     })
   }
 
+  handleDelete(id){
+    const request = new Request();
+    const url = '/api/pirates/' + id;
+    request.delete(url).then(() => {
+      window.location = '/pirates'
+    })
+  }
+
 
   render(){
     if(!this.state.pirate){
@@ -25,8 +33,8 @@ class SinglePirateContainer extends Component {
     }
     return (
       <div className = "component">
-       <Pirate pirate = {this.state.pirate} />
-       <PirateDetails raids={this.state.pirate.raids} />
+       <Pirate pirate = {this.state.pirate} handleDelete = {this.handleDelete}/>
+       
      </div>
     )
   }
