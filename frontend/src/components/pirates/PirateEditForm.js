@@ -3,15 +3,19 @@ import React, {Component} from 'react';
 class PirateEditForm extends Component {
   constructor(props){
     super(props);
+    const pirateShip = props.ships.find((ship) => {
+      return ship.name === props.pirate.ship.name
+    })
     this.state = {
       firstName: props.pirate.firstName,
       lastName: props.pirate.lastName,
       age: props.pirate.age,
-      ship: props.pirate.ship,
-      raidOptions: []
+      ship: pirateShip._links.self.href,
+      raids: props.pirate.raids
     }
 
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.buildRaidOptions = this.buildRaidOptions.bind(this);
   }
 
  handleSubmit(event){
@@ -21,24 +25,34 @@ class PirateEditForm extends Component {
         "lastName": this.state.lastName,
         "age": this.state.age,
         "ship": this.state.ship,
-        "raids": [...this.state.raidOptions].filter((option) => {
-          return option.selected
-        }).map((option) => {
-          return option.value
-        })
+        "raids": this.state.raids
       }
     this.props.handlePirateEdit(pirate)
   }
 
+  buildRaidOptions(e){
+
+    const raids = [... e.target.options].filter((option) => {
+      return option.selected
+    }).map((option) => {
+      return option.value
+    });
+
+    this.setState({raids: raids})
+  }
+
 
 render(){
-
      const shipOptions = this.props.ships.map((ship, index) => {
-      return <option key={index} value={ship._links.self.href}>{ship.name}</option>
+      return <option key={index} selected = {ship.name== this.props.pirate.ship.name} value={ship._links.self.href}>{ship.name}</option>
     })
 
     const raidOptions = this.props.raids.map((raid, index) => {
-      return <option key={index} value={raid._links.self.href}>{raid.location}</option>
+      let hasRaid = false;
+      if (this.props.pirate.raids[index]){
+       hasRaid = true
+    }
+      return <option key={index} selected = {hasRaid} value={raid._links.self.href}>{raid.location}</option>
     })
 
 
@@ -51,7 +65,7 @@ render(){
         <select name="ship" onChange={e => this.setState({ ship: e.target.value })}>
           {shipOptions}
         </select>
-        <select multiple name="raids" onChange={e => this.setState({raidOptions: e.target.options})} >
+        <select multiple name="raids" onChange={this.buildRaidOptions} >
           {raidOptions}
         </select>
         <button type="submit">Save</button>
