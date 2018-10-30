@@ -6,7 +6,7 @@ import PirateEditForm from '../../components/pirates/PirateEditForm'
 class PirateEditFormContainer extends Component {
   constructor(props){
     super(props);
-    this.state = {ships: [], pirate: null, raids: []};
+    this.state = {ships: null, pirate: null, raids: null};
     this.handlePirateEdit = this.handlePirateEdit.bind(this);
   }
 
@@ -15,7 +15,7 @@ class PirateEditFormContainer extends Component {
     request.get("/api/ships").then((ships) => {
       this.setState({ships: ships._embedded.ships})
     });
-    request.get("/api/pirates/" + this.props.id).then((pirate) => {
+    request.get("/api/pirates/" + this.props.id + "?projection=embedShip").then((pirate) => {
       this.setState({pirate: pirate})
     });
     request.get("/api/raids").then((raids) => {
@@ -26,7 +26,7 @@ class PirateEditFormContainer extends Component {
   handlePirateEdit(pirate){
     const request = new Request();
     request.patch('/api/pirates/' + this.props.id, pirate).then(() => {
-      window.location = '/pirates'
+      window.location = '/pirates/' + this.props.id
     })
   }
 

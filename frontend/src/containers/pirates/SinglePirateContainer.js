@@ -38,9 +38,12 @@ class SinglePirateContainer extends Component {
       return null;
     }
     return (
-       <Pirate pirate = {this.state.pirate} handleDelete = {this.handleDelete} handleEdit={this.handleEdit}/>
-
+      <div className="component">
+       <Pirate pirate = {this.state.pirate} />
+       <PirateDetails pirate = {this.state.pirate} raids={this.state.pirate.raids} handleDelete = {this.handleDelete} handleEdit={this.handleEdit}/>
+     </div>
     )
+
   }
 }
 

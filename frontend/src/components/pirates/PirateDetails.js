@@ -3,6 +3,14 @@ import {Link} from 'react-router-dom';
 
 const PirateDetails = (props) => {
 
+  const onDelete = () => {
+    props.handleDelete(props.pirate.id);
+  }
+
+  const onEdit = () => {
+    props.handleEdit(props.pirate.id)
+  }
+
   if(!props.raids){
     return null;
   }
@@ -14,8 +22,10 @@ const PirateDetails = (props) => {
     <React.Fragment>
     Raids:
     <ul>
-    {raids}
+      {raids}
     </ul>
+    <button onClick={onDelete}>Delete Pirate</button>
+    <button onClick={onEdit}>Edit Pirate</button>
     </React.Fragment>
   )
 }

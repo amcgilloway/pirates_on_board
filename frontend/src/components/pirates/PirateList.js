@@ -4,8 +4,11 @@ import Pirate from './Pirate.js';
 
 const PirateList = (props) => {
 	const pirates = props.pirates.map((pirate) => {
-		 	return (<li key={pirate.id} className="component-item">
+		 	return (
+				<li key={pirate.id} className="component-item">
+					<div className = "component">
 				<Pirate pirate={pirate} />
+			</div>
 			</li>
 		)
 		})
