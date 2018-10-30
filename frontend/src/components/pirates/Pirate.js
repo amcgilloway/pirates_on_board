@@ -7,6 +7,10 @@ const Pirate = (props) => {
     props.handleDelete(props.pirate.id);
   }
 
+  const onEdit = () => {
+    props.handleEdit(props.pirate.id)
+  }
+
   if(!props.pirate){
     return null;
   }
@@ -26,6 +30,7 @@ const Pirate = (props) => {
         {raids}
       </ul>
       <button onClick={onDelete}>Delete Pirate</button>
+      <button onClick={onEdit}>Edit Pirate</button>
     </div>
   )
 }
