@@ -8,6 +8,8 @@ class SinglePirateContainer extends Component {
   constructor(props){
     super(props);
     this.state = {pirate: null}
+    this.handleDelete = this.handleDelete.bind(this)
+    this.handleEdit= this.handleEdit.bind(this)
   }
 
   componentDidMount(){
@@ -26,16 +28,18 @@ class SinglePirateContainer extends Component {
     })
   }
 
+  handleEdit(id){
+    window.location = '/pirates/edit/' + id
+  }
+
 
   render(){
     if(!this.state.pirate){
       return null;
     }
     return (
-      <div className = "component">
-       <Pirate pirate = {this.state.pirate} handleDelete = {this.handleDelete}/>
-       
-     </div>
+       <Pirate pirate = {this.state.pirate} handleDelete = {this.handleDelete} handleEdit={this.handleEdit}/>
+
     )
   }
 }
