@@ -26,7 +26,7 @@ class PirateEditFormContainer extends Component {
   handlePirateEdit(pirate){
     const request = new Request();
     request.patch('/api/pirates/' + this.props.id, pirate).then(() => {
-      // window.location = '/pirates'
+      window.location = '/pirates'
     })
   }
 
